@@ -1,0 +1,7 @@
+Model entities were designed using two hibernate features:
+
+1. Columns were joined artist_id from artist table to album table. Columns were joined album_id from
+   album table to song table
+   
+2. A single directional one to many mapping were used from artist to album, and from album to song.
+   Whereas single directional many to one mapping was used from song to album and from album to artist

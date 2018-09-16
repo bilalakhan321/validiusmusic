@@ -1,0 +1,26 @@
+Please use the following URI's as example:
+
+
+ARTIST rules:
+---------------------------------------
+Get all artist: http://localhost:8080/artist
+Get artist by id: /artist/{id}
+Post artist: /artist
+Put artist by id: /artist/{id}
+Delete artist by id: /artist/{id}
+
+ALBUM rules:
+--------------------------------------
+Get all album from artist: /artist/{artistid}/albums
+Get album by id: /artist/{artistid}/albums/{albumid}
+Post album from artist: /artist/{artistid}/albums
+Put album by id from album from artist: /artist/{artistid}/albums/{albumsid}
+Delete album by id from album from artist: /artist/{artistid}/albums/{albumsid}
+
+SONG rules
+-------------------------------------
+Get all songs from album from artist: /artist/{artistid}/albums/{albumsid}/songs
+Post song to album from artist: /artist/{artistid}/albums/{albumsid}/songs
+Put song by id from album from artist: /artist/{artistid}/albums/{albumsid}/songs/{songid}
+Delete song by id from album from artist: /artist/{artistid}/albums/{albumsid}/songs/{songid}
+

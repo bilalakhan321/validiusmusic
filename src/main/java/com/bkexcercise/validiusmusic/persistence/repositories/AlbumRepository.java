@@ -11,6 +11,6 @@ import com.bkexcercise.validiusmusic.persistence.model.Album;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 	
 	public Page<Album> findByArtistId(Long artistId, Pageable pageable);
-	//public Optional<Album> findById(Long albumId);
+	
 	
 }

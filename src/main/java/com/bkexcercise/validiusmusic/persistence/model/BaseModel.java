@@ -18,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 )
 public abstract class BaseModel {
 	
+	/*
+	 * Auto Generate created_at and modified_at when artist, album and song items are initialized
+	 * @EntityListeners ensures these properties are automatically handled.
+	 */
+	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate

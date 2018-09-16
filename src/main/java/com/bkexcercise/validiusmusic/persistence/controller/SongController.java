@@ -14,39 +14,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bkexcercise.validiusmusic.exception.ResourceNotFoundException;
 import com.bkexcercise.validiusmusic.persistence.model.Song;
-import com.bkexcercise.validiusmusic.persistence.repositories.AlbumRepository;
-import com.bkexcercise.validiusmusic.persistence.repositories.ArtistRepository;
-import com.bkexcercise.validiusmusic.persistence.repositories.SongRepository;
+import com.bkexcercise.validiusmusic.persistence.service.SongService;
 
 @RestController
 public class SongController {
 	
-	@Autowired
-	private ArtistRepository artistRepository;
 	
-	@Autowired
-	private AlbumRepository albumRepository;
-	
-	private SongRepository songRepository;
+	@Autowired 
+	SongService songService;
 	
 	@GetMapping("/artist/{artistId}/albums/{albumId}/songs")
     public Page<Song> getAllSongsByAlbumId(@PathVariable (value = "artistId") Long artistId,
     		@PathVariable (value = "albumId") Long albumId, 
     		Pageable pageable) {
 		
-        return songRepository.findByAlbumId(albumId, pageable);
+		//Return get all songs from service layer using specified album id
+		return songService.getAllSongsByAlbumId(artistId, albumId, pageable);
     }
 	
 	@PostMapping("/artist/{artistId}/albums/{albumId}/songs")
-	public Song createSong(@PathVariable (value = "albumId") Long albumId,
+	public Song createSong(@PathVariable (value = "artistId") Long artistId,
+			@PathVariable (value = "albumId") Long albumId,
             @Valid @RequestBody Song song) {
 		
-		return albumRepository.findById(albumId).map(album -> {
-            song.setAlbum(album);
-            return songRepository.save(song);
-        }).orElseThrow(() -> new ResourceNotFoundException("AlbumId " + albumId + " not found"));
+		//Return the create function from service layer
+		return songService.createSong(artistId, albumId, song);
 	
 	}
 	
@@ -55,36 +48,18 @@ public class SongController {
                                  @PathVariable (value = "albumId") Long albumId,
                                  @PathVariable (value = "songId") Long songId,
                                  @Valid @RequestBody Song songRequest) {
-        if(!artistRepository.existsById(artistId)) {
-            throw new ResourceNotFoundException("ArtistId " + artistId + " not found");
-        }
         
-        if(!albumRepository.existsById(albumId)) {
-            throw new ResourceNotFoundException("AlbumId " + albumId + " not found");
-        }
-
-        return songRepository.findById(songId).map(song -> {
-            song.setName(songRequest.getName());
-            song.setTrack(songRequest.getTrack());
-            return songRepository.save(song);
-        }).orElseThrow(() -> new ResourceNotFoundException("SongId " + songId + "not found"));
+		//Return update function from service layer
+		return songService.updateSong(artistId, albumId, songId, songRequest);
     }
 	
 	@DeleteMapping("/artist/{artistId}/albums/{albumId}/songs/{songId}")
     public ResponseEntity<?> deleteSong(@PathVariable (value = "artistId") Long artistId,
                               @PathVariable (value = "albumId") Long albumId,
                               @PathVariable (value = "songId") Long songId) {
-        if(!artistRepository.existsById(artistId)) {
-            throw new ResourceNotFoundException("ArtistId " + artistId + " not found");
-        }
         
-        if(!albumRepository.existsById(albumId)) {
-            throw new ResourceNotFoundException("AlbumId " + albumId + " not found");
-        }
-
-        return songRepository.findById(songId).map(song -> {
-             songRepository.delete(song);
-             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("SongId " + songId + " not found"));
+		//Return the delete function from service layer
+		return songService.deleteSong(artistId, albumId, songId);
     }
+	
 }

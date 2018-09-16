@@ -1,5 +1,6 @@
 package com.bkexcercise.validiusmusic.persistence.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,9 +31,7 @@ public class Song extends BaseModel {
 	public Song() {
 		
 	}
-	
-	
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,12 +45,26 @@ public class Song extends BaseModel {
 	@Column(name = "track", nullable = false)
 	private int track;
 	
-	
-	@ManyToOne
+	/**
+	 * Join the Album id to song table and create association from one album to many songs
+	 */
+	@ManyToOne(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+                })
     @JoinColumn(name = "album_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Album album;
+	
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
 	
 
 	public Long getId() {
@@ -78,12 +91,5 @@ public class Song extends BaseModel {
 		this.track = track;
 	}
 	
-	public Album getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Album album) {
-		this.album = album;
-	}
 	
 }

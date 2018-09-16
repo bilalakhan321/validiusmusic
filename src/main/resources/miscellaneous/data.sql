@@ -1,18 +1,21 @@
---Artists----
-
 insert into artist (name) values ('Muse');
 insert into artist (name) values ('Duran Duran');
 INSERT INTO artist (name) values ('Van Hansen');
 
---Albums---
+
+--INSERT INTO album (name, year_released, artist_id) values ('First Album of Van Hansen', 1995, 1);
 
 insert into album(name, year_released, artist_id) values ('Drones', 2015, 1);
 insert into album(name, year_released, artist_id) values ('Origin of Symmetry', 2001, 1);
 insert into album(name, year_released, artist_id) values ('Rio', 1982, 2);
 insert into album(name, year_released, artist_id) values ('1984', 1984, 3);
 
+--insert into artist_albums(artist_id, album_id) values(1, 1);
+--insert into artist_albums(artist_id, album_id) values(1, 2);
+--insert into artist_albums(artist_id, album_id) values(2, 3);
+--insert into artist_albums(artist_id, album_id) values(3, 4);
 
-
+--INSERT INTO song (name, track, album_id) values ('Mercy', 1, 1);
 
 --Songs----------------------------------------------------------------------
 --Muse-Drones

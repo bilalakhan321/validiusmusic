@@ -1,0 +1,6 @@
+For testing repositories, I created a seperate embedded test empty H2 database.
+I was hoping to apply this method for Service layer but wasn't successful. Properties have been setup
+in application.properties found in src/test/resources folder
+
+I was hoping to apply the empty database to service layer but was unable to successfully create bean.
+Instead for service layer I used Mockito Framework to mock data.

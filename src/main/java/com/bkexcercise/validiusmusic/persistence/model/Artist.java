@@ -18,7 +18,6 @@ public class Artist extends BaseModel {
     	
     }
     
-	
 	public Artist(@NotNull @Size(max = 100) String name) {
 		this.name = name;
 	}
@@ -32,17 +31,6 @@ public class Artist extends BaseModel {
     @Column(unique = true)
     private String name;
     
-    /*
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            })
-    @JoinTable(name = "artist_albums",
-            joinColumns = { @JoinColumn(name = "artist_id") },
-            inverseJoinColumns = { @JoinColumn(name = "album_id") })
-    private Set<Album> album = new HashSet<>();
-    */
     
     public Long getId() {
 		return id;
@@ -59,17 +47,5 @@ public class Artist extends BaseModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	/*public Set<Album> getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Set<Album> album) {
-		this.album = album;
-	}
-    */
 	
-    
-
-
 }

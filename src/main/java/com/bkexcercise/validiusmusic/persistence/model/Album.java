@@ -1,11 +1,5 @@
 package com.bkexcercise.validiusmusic.persistence.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,10 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -55,6 +46,10 @@ public class Album extends BaseModel {
 	@Column(name = "year_released", nullable = false)
 	private int yearReleased;
 	
+	
+	/*
+	 * Join the artist id to song table and create association from one artist to many albums
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -62,18 +57,6 @@ public class Album extends BaseModel {
 	private Artist artist;
 	
 	
-	/*
-	@OneToMany(mappedBy = "song")
-	private Collection<Song> songs = new ArrayList<>();
-	
-	public Collection<Song> getSongs() {
-		return songs;
-	}
-	
-	public void setSongs(Collection<Song> songs) {
-		this.songs = songs;
-	}
-	*/
 	public Long getId() {
 		return id;
 	}

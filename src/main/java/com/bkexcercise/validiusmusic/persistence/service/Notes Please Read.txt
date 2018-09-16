@@ -1,0 +1,10 @@
+Initially the design on the application was made without the service layer.
+
+I intentionally had not added this layer as it didn't seem necessary at the time of designing.
+All the CRUD operations were specifically being handled at controller level.
+
+During testing phase it was quickly realized that there is added benefit to seperate controller http functions
+and CRUD operation specific to business logic.
+
+As many of the code was shifted to service layer, you will see additional of http verbs which should be ommitted
+at a later date.
